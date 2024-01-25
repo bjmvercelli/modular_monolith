@@ -1,8 +1,5 @@
 import { Sequelize } from "sequelize-typescript";
 import { ProductModel } from "../repository/product.model";
-import { ProductRepository } from "../repository/product.repository";
-import { AddProductUseCase } from "../usecase/add-product/add-product.usecase";
-import { ProductAdmFacade } from "./product-adm.facade";
 import { ProductFacadeFactory } from "../factory/facade.factory";
 
 describe("Product Adm Facade tests", () => {
@@ -46,4 +43,5 @@ describe("Product Adm Facade tests", () => {
     expect(productAdded.purchasePrice).toEqual(productToAdd.purchasePrice);
     expect(productAdded.stock).toEqual(productToAdd.stock);
   });
+
 });
