@@ -35,7 +35,7 @@ describe("Product Repository tests", () => {
     await productRepository.add(productToCreate);
 
     const product = await ProductModel.findOne({
-      where: { id: 1 },
+      where: { id: newProductData.id.value },
       raw: true,
     });
 
