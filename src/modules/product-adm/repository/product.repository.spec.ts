@@ -36,7 +36,6 @@ describe("Product Repository tests", () => {
 
     const product = await ProductModel.findOne({
       where: { id: newProductData.id.value },
-      raw: true,
     });
 
     expect(product.id).toEqual(newProductData.id.value);

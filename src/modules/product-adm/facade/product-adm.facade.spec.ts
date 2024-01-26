@@ -34,7 +34,6 @@ describe("Product Adm Facade tests", () => {
 
     const productAdded = await ProductModel.findOne({
       where: { id: productToAdd.id },
-      raw: true,
     });
 
     expect(productAdded.id).toEqual(productToAdd.id);

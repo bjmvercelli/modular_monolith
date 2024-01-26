@@ -9,6 +9,7 @@ describe("Product Repository tests", () => {
     sequelize = new Sequelize({
       dialect: "sqlite",
       storage: ":memory:",
+      logging: false,
       models: [ProductModel],
       sync: { force: true },
     });
@@ -50,5 +51,23 @@ describe("Product Repository tests", () => {
     expect(products[1].description).toEqual(product2.description);
     expect(products[1].salesPrice).toEqual(product2.salesPrice);
 
+  });
+
+  it("should find a product", async () => {
+    const product = {
+      id: "1",
+      name: "product name",
+      description: "product description",
+      salesPrice: 100,
+    };
+    await ProductModel.create(product);
+
+    const repository = new ProductRepository();
+    const productFound = await repository.find(product.id);
+
+    expect(productFound.id.value).toEqual(product.id);
+    expect(productFound.name).toEqual(product.name);
+    expect(productFound.description).toEqual(product.description);
+    expect(productFound.salesPrice).toEqual(product.salesPrice);
   });
 });
