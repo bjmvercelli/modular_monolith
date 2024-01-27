@@ -39,7 +39,7 @@ describe("Client repository test", () => {
     expect(result.name).toEqual(client.name);
     expect(result.email).toEqual(client.email);
     expect(result.address).toEqual(client.address);
-    expect(result.createdAt).toEqual(expect.any(Date));
-    expect(result.updatedAt).toEqual(expect.any(Date));
+    expect(result.createdAt).toEqual(client.createdAt);
+    expect(result.updatedAt).toEqual(client.updatedAt);
   });
 });
