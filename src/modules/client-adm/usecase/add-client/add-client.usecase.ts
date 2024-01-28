@@ -9,6 +9,7 @@ export class AddClientUseCase {
 
   async execute(input: AddClientInputDTO): Promise<AddClientOutputDTO> {
     const client = new Client({
+      id: new Id(input.id),
       name: input.name,
       email: input.email,
       address: input.address,

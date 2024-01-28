@@ -10,8 +10,8 @@ import { ProductAdmFacadeInterface } from "./product-adm.facade.interface";
 
 export class ProductAdmFacade implements ProductAdmFacadeInterface {
   constructor(
-    private readonly addProductUseCase: UseCaseInterface<AddProductDTOInput, AddProductDTOOutput>,
-    private readonly checkStockUseCase: UseCaseInterface<CheckStockInputDTO, CheckStockOutputDTO>
+    private readonly addProductUseCase: UseCaseInterface,
+    private readonly checkStockUseCase: UseCaseInterface
   ) {}
 
   async addProduct(input: AddProductFacadeInputDTO): Promise<void> {

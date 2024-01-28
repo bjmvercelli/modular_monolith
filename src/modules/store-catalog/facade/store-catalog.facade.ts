@@ -9,17 +9,11 @@ import { StoreCatalogFacadeInterface } from "./store-catalog.facade.interface";
 
 export class StoreCatalogFacade implements StoreCatalogFacadeInterface {
   constructor(
-    private readonly findAllProductsUseCase: UseCaseInterface<
-      undefined,
-      StoreCatalogFacadeFindAllOutputDTO
-    >,
-    private readonly findProductUseCase: UseCaseInterface<
-      StoreCatalogFacadeFindInputDTO,
-      StoreCatalogFacadeFindOutputDTO
-    >
+    private readonly findAllProductsUseCase: UseCaseInterface,
+    private readonly findProductUseCase: UseCaseInterface
   ) {}
   async findAll(): Promise<StoreCatalogFacadeFindAllOutputDTO> {
-    return await this.findAllProductsUseCase.execute();
+    return await this.findAllProductsUseCase.execute({});
   }
   async find(
     input: StoreCatalogFacadeFindInputDTO
