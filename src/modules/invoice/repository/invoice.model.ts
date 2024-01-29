@@ -34,4 +34,10 @@ export class InvoiceModel extends Model {
 
   @HasMany(() => InvoiceItemModel)
   declare items: InvoiceItemModel[];
+
+  @Column({ allowNull: false })
+  declare createdAt: Date;
+
+  @Column({ allowNull: false })
+  declare updatedAt: Date;
 }

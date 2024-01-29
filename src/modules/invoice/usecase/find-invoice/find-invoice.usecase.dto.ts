@@ -6,11 +6,6 @@ export interface FindInvoiceUseCaseOutputDTO {
   id: string;
   name: string;
   document: string;
-  items: {
-    id: string;
-    name: string;
-    price: number;
-  }[];
   address: {
     street: string;
     number: string;
@@ -19,4 +14,11 @@ export interface FindInvoiceUseCaseOutputDTO {
     state: string;
     zipCode: string;
   };
+  items: {
+    id: string;
+    name: string;
+    price: number;
+  }[];
+  total: number;
+  createdAt: Date;
 }

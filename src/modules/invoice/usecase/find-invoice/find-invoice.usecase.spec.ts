@@ -41,25 +41,11 @@ describe("Find invoice usecase tests", () => {
     const result = await usecase.execute(input);
 
     expect(repository.find).toBeCalledWith(input.id);
-    expect(result).toEqual({
-      id: "123",
-      name: "John Doe",
-      document: "12345678900",
-      address: {
-        street: "Rua dos bobos",
-        number: "0",
-        complement: "Casa",
-        city: "São Paulo",
-        state: "SP",
-        zipCode: "12345678",
-      },
-      items: [
-        {
-          id: "123",
-          name: "Item 1",
-          price: 10,
-        },
-      ],
-    });
+    expect(result.id).toEqual(InvoiceMock.id.value);
+    expect(result.name).toEqual(InvoiceMock.name);
+    expect(result.document).toEqual(InvoiceMock.document);
+    expect(result.address.street).toEqual(InvoiceMock.address.street);
+    expect(result.items[0].id).toEqual(InvoiceMock.items[0].id.value);
+    expect(result.createdAt).toEqual(InvoiceMock.createdAt);
   });
 });

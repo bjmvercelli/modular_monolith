@@ -26,6 +26,8 @@ export class InvoiceRepository implements InvoiceGateway {
         name: item.name,
         price: item.price,
       })),
+      createdAt: invoice.createdAt,
+      updatedAt: invoice.updatedAt,
     }, {
       include: [AddressModel, InvoiceItemModel],
     });

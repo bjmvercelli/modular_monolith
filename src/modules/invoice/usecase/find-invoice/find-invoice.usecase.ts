@@ -29,6 +29,8 @@ export class FindInvoiceUseCase implements UseCaseInterface {
         state: invoice.address.state,
         zipCode: invoice.address.zipCode,
       },
+      total: invoice.total,
+      createdAt: invoice.createdAt,
     };
   }
 }

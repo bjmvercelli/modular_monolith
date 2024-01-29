@@ -58,6 +58,8 @@ describe("Invoice repository tests", () => {
     expect(createdInvoice.document).toEqual(invoiceToCreate.document);
     expect(createdInvoice.address.street).toEqual(invoiceToCreate.address.street);
     expect(createdInvoice.items[0].id).toEqual(invoiceToCreate.items[0].id.value);
+    expect(createdInvoice.createdAt).toEqual(expect.any(Date));
+    expect(createdInvoice.updatedAt).toEqual(expect.any(Date));
   });
 
   it("should find an invoice", async () => {
@@ -78,7 +80,7 @@ describe("Invoice repository tests", () => {
           name: "Item 1",
           price: 10,
         }),
-      ]
+      ],
     });
     await InvoiceModel.create({
       id: invoiceToCreate.id.value,
@@ -97,6 +99,8 @@ describe("Invoice repository tests", () => {
         name: item.name,
         price: item.price,
       })),
+      createdAt: invoiceToCreate.createdAt,
+      updatedAt: invoiceToCreate.updatedAt,
     }, {
       include: [AddressModel, InvoiceItemModel],
     });
@@ -109,5 +113,7 @@ describe("Invoice repository tests", () => {
     expect(foundInvoice.document).toEqual(invoiceToCreate.document);
     expect(foundInvoice.address.street).toEqual(invoiceToCreate.address.street);
     expect(foundInvoice.items[0].id).toEqual(invoiceToCreate.items[0].id);
+    expect(foundInvoice.createdAt).toEqual(expect.any(Date));
+    expect(foundInvoice.updatedAt).toEqual(expect.any(Date));
   });
 });
