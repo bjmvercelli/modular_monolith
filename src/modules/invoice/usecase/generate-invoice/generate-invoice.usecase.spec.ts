@@ -1,31 +1,34 @@
-import { Id } from "../../@shared/domain/value-object/id.value-object";
+import { Address } from "../../../@shared/domain/value-object/address.value-object";
+import { Id } from "../../../@shared/domain/value-object/id.value-object";
+import { InvoiceItem } from "../../domain/entity/invoice-items.entity";
+import { Invoice } from "../../domain/entity/invoice.entity";
 import { GenerateInvoiceUseCase } from "./generate-invoice.usecase";
 
-const mockGeneratedInvoice = {
+const mockGeneratedInvoice = new Invoice({
   id: new Id("123"),
   name: "John Doe",
   document: "12345678910",
   items: [
-    {
+    new InvoiceItem({
       id: new Id("1"),
       name: "Item 1",
       price: 100,
-    },
-    {
+    }),
+    new InvoiceItem({
       id: new Id("2"),
       name: "Item 2",
       price: 200,
-    },
+    }),
   ],
-  address: {
+  address: new Address({
     street: "Street",
     number: "123",
     complement: "Complement",
     city: "City",
     state: "State",
     zipCode: "12345678",
-  },
-};
+  }),
+});
 
 const MockRepository = () => ({
   save: jest.fn().mockResolvedValue(mockGeneratedInvoice),

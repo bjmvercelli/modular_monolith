@@ -59,4 +59,55 @@ describe("Invoice repository tests", () => {
     expect(createdInvoice.address.street).toEqual(invoiceToCreate.address.street);
     expect(createdInvoice.items[0].id).toEqual(invoiceToCreate.items[0].id.value);
   });
+
+  it("should find an invoice", async () => {
+    const invoiceToCreate = new Invoice({
+      id: new Id("123"),
+      name: "John Doe",
+      document: "12345678900",
+      address: new Address({
+        street: "Rua dos bobos",
+        number: "0",
+        complement: "Casa",
+        city: "São Paulo",
+        state: "SP",
+        zipCode: "12345678",
+      }),
+      items: [
+        new InvoiceItem({
+          name: "Item 1",
+          price: 10,
+        }),
+      ]
+    });
+    await InvoiceModel.create({
+      id: invoiceToCreate.id.value,
+      name: invoiceToCreate.name,
+      document: invoiceToCreate.document,
+      address: {
+        street: invoiceToCreate.address.street,
+        number: invoiceToCreate.address.number,
+        complement: invoiceToCreate.address.complement,
+        city: invoiceToCreate.address.city,
+        state: invoiceToCreate.address.state,
+        zipCode: invoiceToCreate.address.zipCode,
+      },
+      items: invoiceToCreate.items.map((item) => ({
+        id: item.id.value,
+        name: item.name,
+        price: item.price,
+      })),
+    }, {
+      include: [AddressModel, InvoiceItemModel],
+    });
+
+    const repository = new InvoiceRepository();
+    const foundInvoice = await repository.find(invoiceToCreate.id.value);
+
+    expect(foundInvoice.id).toEqual(invoiceToCreate.id);
+    expect(foundInvoice.name).toEqual(invoiceToCreate.name);
+    expect(foundInvoice.document).toEqual(invoiceToCreate.document);
+    expect(foundInvoice.address.street).toEqual(invoiceToCreate.address.street);
+    expect(foundInvoice.items[0].id).toEqual(invoiceToCreate.items[0].id);
+  });
 });
