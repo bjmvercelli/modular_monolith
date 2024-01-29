@@ -7,7 +7,7 @@ type InvoiceItemsProps = {
   price: number;
 }
 
-export class InvoiceItems extends BaseEntity {
+export class InvoiceItem extends BaseEntity {
   private _name: string;
   private _price: number;
   

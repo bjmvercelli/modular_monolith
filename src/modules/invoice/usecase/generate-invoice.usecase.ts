@@ -1,6 +1,6 @@
 import { Address } from "../../@shared/domain/value-object/address.value-object";
 import { UseCaseInterface } from "../../@shared/usecase/use-case.interface";
-import { InvoiceItems } from "../domain/entity/invoice-items.entity";
+import { InvoiceItem } from "../domain/entity/invoice-items.entity";
 import { Invoice } from "../domain/entity/invoice.entity";
 import { InvoiceGateway } from "../gateway/invoice.gateway";
 import { GenerateInvoiceUseCaseInputDTO, GenerateInvoiceUseCaseOutputDTO } from "./generate-invoice.usecase.dto";
@@ -14,7 +14,7 @@ export class GenerateInvoiceUseCase implements UseCaseInterface {
     const invoice = new Invoice({
       name: input.name,
       document: input.document,
-      items: input.items.map(item => new InvoiceItems({
+      items: input.items.map(item => new InvoiceItem({
         name: item.name,
         price: item.price,
       })),
