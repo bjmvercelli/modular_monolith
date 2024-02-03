@@ -43,7 +43,13 @@ export class PlaceOrderUseCase implements UseCaseInterface {
       id: new Id(client.id),
       name: client.name,
       email: client.email,
-      address: client.address,
+      city: client.city,
+      complement: client.complement,
+      document: client.document,
+      number: client.number,
+      state: client.state,
+      street: client.street,
+      zipCode: client.zipCode,
     });
 
     // criar obj da order
@@ -53,16 +59,43 @@ export class PlaceOrderUseCase implements UseCaseInterface {
     });
 
     // processar pagamento
-    
+    const payment = await this._paymentFacade.processPayment({
+      orderId: orderObj.id.value,
+      amount: orderObj.total,
+    });
 
-    // criar invoice
+    const invoice =
+      payment.status === "approved"
+        ? await this._invoiceFacade.generateInvoice({
+            name: client.name,
+            document: client.document,
+            city: client.city,
+            state: client.state,
+            street: client.street,
+            number: client.number,
+            zipCode: client.zipCode,
+            complement: client.complement,
+            items: products.map((product) => ({
+              id: product.id.value,
+              name: product.name,
+              price: product.salesPrice,
+            })),
+          })
+        : null;
+
+    if (payment.status === "approved") {
+      orderObj.approve();
+    }
+    this.checkoutRepository.addOrder(orderObj);
 
     return {
-      id: "id",
-      invoiceId: "invoiceId",
-      status: "status",
-      total: 0,
-      products: [],
+      id: orderObj.id.value,
+      invoiceId: payment.status === "approved" ? invoice.id : null,
+      status: orderObj.status,
+      total: orderObj.total,
+      products: orderObj.products.map((product) => ({
+        productId: product.id.value,
+      })),
     };
   }
 

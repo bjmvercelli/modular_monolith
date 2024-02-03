@@ -15,7 +15,13 @@ describe("Add client usecase test", () => {
     const client = {
       name: "John Doe",
       email: "john@doe.com",
-      address: "John Doe Street",
+      document: "123456789",
+      street: "Street 1",
+      number: "123",
+      complement: "Complement 1",
+      city: "City 1",
+      state: "State 1",
+      zipCode: "12345678",
     }
     const result = await usecase.execute(client);
 
@@ -24,7 +30,13 @@ describe("Add client usecase test", () => {
       id: expect.any(String),
       name: client.name,
       email: client.email,
-      address: client.address,
+      document: client.document,
+      street: client.street,
+      number: client.number,
+      complement: client.complement,
+      city: client.city,
+      state: client.state,
+      zipCode: client.zipCode,
       createdAt: expect.any(Date),
       updatedAt: expect.any(Date),
     });
