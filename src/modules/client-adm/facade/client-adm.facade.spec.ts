@@ -27,7 +27,13 @@ describe("Client adm facade test", () => {
       id: "1",
       name: "John Doe",
       email: "john@doe.com",
-      address: "John Doe Street",
+      document: "123456789",
+      street: "Street 1",
+      number: "123",
+      complement: "Complement 1",
+      city: "City 1",
+      state: "State 1",
+      zipCode: "12345678",
     }
     await facade.add(input);
 
@@ -47,7 +53,13 @@ describe("Client adm facade test", () => {
       id: "1",
       name: "John Doe",
       email: "john@doe.com",
-      address: "John Doe Street",
+      document: "123456789",
+      street: "Street 1",
+      number: "123",
+      complement: "Complement 1",
+      city: "City 1",
+      state: "State 1",
+      zipCode: "12345678",
       updatedAt: new Date(),
       createdAt: new Date(),
     }
@@ -59,7 +71,7 @@ describe("Client adm facade test", () => {
     expect(client.id).toEqual(input.id);
     expect(client.name).toEqual(input.name);
     expect(client.email).toEqual(input.email);
-    expect(client.address).toEqual(input.address);
+    expect(client.street).toEqual(input.street);
     expect(client.createdAt).toEqual(expect.any(Date));
     expect(client.updatedAt).toEqual(expect.any(Date));
   });
